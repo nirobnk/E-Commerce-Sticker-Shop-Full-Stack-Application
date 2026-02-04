@@ -1,4 +1,4 @@
-package com.eazybites.eazystore.config;
+package com.nirobnk.stickershop.config;
 
 
 import org.springframework.context.annotation.Bean;

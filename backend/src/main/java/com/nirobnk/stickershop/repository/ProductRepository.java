@@ -1,6 +1,6 @@
-package com.eazybites.eazystore.repository;
+package com.nirobnk.stickershop.repository;
 
-import com.eazybites.eazystore.entity.Product;
+import com.nirobnk.stickershop.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

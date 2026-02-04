@@ -1,13 +1,13 @@
-package com.eazybites.eazystore;
+package com.nirobnk.stickershop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EazystoreApplication {
+public class StickershopApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EazystoreApplication.class, args);
+		SpringApplication.run(StickershopApplication.class, args);
 	}
 
 }

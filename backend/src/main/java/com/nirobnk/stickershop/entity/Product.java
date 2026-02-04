@@ -1,4 +1,4 @@
-package com.eazybites.eazystore.entity;
+package com.nirobnk.stickershop.entity;
 
 
 import jakarta.persistence.*;

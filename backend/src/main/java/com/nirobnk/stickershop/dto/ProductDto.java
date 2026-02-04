@@ -1,4 +1,4 @@
-package com.eazybites.eazystore.dto;
+package com.nirobnk.stickershop.dto;
 
 
 import lombok.Getter;

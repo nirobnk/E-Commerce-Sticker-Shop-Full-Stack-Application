@@ -1,10 +1,10 @@
-package com.eazybites.eazystore;
+package com.nirobnk.stickershop;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class EazystoreApplicationTests {
+class StickershopApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,19 +1,16 @@
-package com.eazybites.eazystore.controller;
+package com.nirobnk.stickershop.controller;
 
 
-import com.eazybites.eazystore.dto.ProductDto;
-import com.eazybites.eazystore.entity.Product;
-import com.eazybites.eazystore.repository.ProductRepository;
-import com.eazybites.eazystore.service.IProductService;
+import com.nirobnk.stickershop.dto.ProductDto;
+import com.nirobnk.stickershop.service.IProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
-import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -27,8 +24,9 @@ public class ProductController {
 
 
     @GetMapping
-    public List<ProductDto> getProducts() {
+    public ResponseEntity<List<ProductDto>> getProducts() {
         List<ProductDto> productList = iProductService.getProducts();
-        return productList;
+        System.out.println("testing dev tool12");
+        return ResponseEntity.ok(productList);
     }
 }

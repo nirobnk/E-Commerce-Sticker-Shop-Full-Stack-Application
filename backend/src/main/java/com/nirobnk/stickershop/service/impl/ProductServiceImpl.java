@@ -1,10 +1,9 @@
-package com.eazybites.eazystore.service.impl;
+package com.nirobnk.stickershop.service.impl;
 
-import com.eazybites.eazystore.controller.ProductController;
-import com.eazybites.eazystore.dto.ProductDto;
-import com.eazybites.eazystore.entity.Product;
-import com.eazybites.eazystore.repository.ProductRepository;
-import com.eazybites.eazystore.service.IProductService;
+import com.nirobnk.stickershop.dto.ProductDto;
+import com.nirobnk.stickershop.entity.Product;
+import com.nirobnk.stickershop.repository.ProductRepository;
+import com.nirobnk.stickershop.service.IProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
