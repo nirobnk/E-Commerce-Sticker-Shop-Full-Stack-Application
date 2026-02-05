@@ -2,8 +2,10 @@ package com.nirobnk.stickershop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
+@EnableJpaAuditing(auditorAwareRef = "auditorAwareImpl")
 public class StickershopApplication {
 
 	public static void main(String[] args) {
