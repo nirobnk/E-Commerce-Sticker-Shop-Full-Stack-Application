@@ -6,18 +6,19 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
+import org.springframework.web.context.annotation.SessionScope;
 
 @Component
-@RequestScope
+@SessionScope
 @Getter
 @Setter
 @Slf4j
-public class RequestScopedBean {
+public class SessionScopedBean {
 
     private String userName;
 
-    public RequestScopedBean(){
-        log.info("RequestScopedBean initialized");
+    public SessionScopedBean() {
+        log.info("SessionScopedBean initialized");
     }
 
 }
