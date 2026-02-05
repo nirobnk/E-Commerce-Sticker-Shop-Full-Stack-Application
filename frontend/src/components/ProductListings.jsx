@@ -1,19 +1,19 @@
 import React, { useState, useMemo } from "react";
 import ProductCard from "./ProductCard";
-import { SearchBox } from "./SearchBox";
-import { DropDown } from "./DropDown";
+import SearchBox from "./SearchBox";
+import Dropdown from "./Dropdown";
 
 const sortList = ["Popularity", "Price Low to High", "Price High to Low"];
 
-export const ProductListings = ({ products }) => {
+export default function ProductListings({ products }) {
   const [searchText, setSearchText] = useState("");
   const [selectedSort, setSelectedSort] = useState("Popularity");
 
-  // Memoized filtered and sorted products
   const filteredAndSortedProducts = useMemo(() => {
     if (!Array.isArray(products)) {
       return [];
     }
+
     let filteredProducts = products.filter(
       (product) =>
         product.name.toLowerCase().includes(searchText.toLowerCase()) ||
@@ -31,31 +31,26 @@ export const ProductListings = ({ products }) => {
           return parseInt(b.popularity) - parseInt(a.popularity);
       }
     });
+  }, [products, searchText, selectedSort]);
 
-
-  }, [products, searchText, selectedSort]);//dependencies for useMemo
-
-
-  // Handlers
-  const handleSearchChange = (inputSearch) => {
+  function handleSearchChange(inputSearch) {
     setSearchText(inputSearch);
-  };
+  }
 
-  const handleSortChange = (sortType) => {
+  function handleSortChange(sortType) {
     setSelectedSort(sortType);
-  };
-
+  }
 
   return (
     <div className="max-w-[1152px] mx-auto">
       <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-12">
         <SearchBox
           label="Search"
-          placeholder="Search Products..."
+          placeholder="Search products..."
           value={searchText}
           handleSearch={(value) => handleSearchChange(value)}
         />
-        <DropDown
+        <Dropdown
           label="Sort by"
           options={sortList}
           value={selectedSort}
@@ -68,9 +63,11 @@ export const ProductListings = ({ products }) => {
             <ProductCard key={product.productId} product={product} />
           ))
         ) : (
-          <p className="product-listings-empty">No prducts founds</p>
+          <p className="text-center font-primary font-bold text-lg text-primary">
+            No products found
+          </p>
         )}
       </div>
     </div>
   );
-};
+}

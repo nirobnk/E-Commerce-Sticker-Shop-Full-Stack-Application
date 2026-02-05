@@ -12,8 +12,8 @@ export default function Footer() {
         aria-hidden="true"
       />
       by
-      <a href="https://eazybytes.com/" target="_blank" rel="noreffer">
-        eazybytes
+      <a href="https://nirobnk.com/" target="_blank" rel="noreffer">
+        nirobnk
       </a>
     </footer>
   );
