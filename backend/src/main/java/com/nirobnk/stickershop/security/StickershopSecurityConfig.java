@@ -58,9 +58,8 @@ public class StickershopSecurityConfig {
 
     @Bean
     public AuthenticationManager authenticationManager(
-            UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder) {
         var daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
         var providerManager = new ProviderManager(daoAuthenticationProvider);
         return providerManager;

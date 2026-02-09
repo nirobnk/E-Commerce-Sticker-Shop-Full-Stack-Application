@@ -7,9 +7,12 @@ import com.nirobnk.stickershop.dto.LoginRequestDto;
 import com.nirobnk.stickershop.dto.LoginResponseDto;
 import com.nirobnk.stickershop.dto.RegisterRequestDto;
 import com.nirobnk.stickershop.dto.UserDto;
+import com.nirobnk.stickershop.entity.Customer;
+import com.nirobnk.stickershop.repository.CustomerRepository;
 import com.nirobnk.stickershop.util.JwtUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,7 +29,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -34,9 +40,9 @@ import java.util.List;
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
-    private final InMemoryUserDetailsManager inMemoryUserDetailsManager;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final CustomerRepository customerRepository;
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDto> apiLogin(@RequestBody
@@ -65,10 +71,26 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@Valid @RequestBody RegisterRequestDto registerRequestDto) {
-        inMemoryUserDetailsManager.createUser(new User(registerRequestDto.getEmail(),
-                passwordEncoder.encode(registerRequestDto.getPassword()),
-                List.of(new SimpleGrantedAuthority("USER"))));
+    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequestDto registerRequestDto) {
+        Optional<Customer> existingCustomer = customerRepository.findByEmailOrMobileNumber(
+                registerRequestDto.getEmail(),registerRequestDto.getMobileNumber());
+        if(existingCustomer.isPresent()) {
+            Map<String, String> errors = new HashMap<>();
+            Customer customer = existingCustomer.get();
+
+            if (customer.getEmail().equalsIgnoreCase(registerRequestDto.getEmail())) {
+                errors.put("email", "Email is already registered");
+            }
+            if (customer.getMobileNumber().equals(registerRequestDto.getMobileNumber())) {
+                errors.put("mobileNumber", "Mobile number is already registered");
+            }
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+        Customer customer = new Customer();
+        BeanUtils.copyProperties(registerRequestDto, customer);
+        customer.setPasswordHash(passwordEncoder.encode(registerRequestDto.getPassword()));
+        customerRepository.save(customer);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body("Registration successful");
