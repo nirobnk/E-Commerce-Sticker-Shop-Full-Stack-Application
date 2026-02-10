@@ -23,7 +23,7 @@ import { CartProvider } from "./store/cart-context.jsx";
 import { AuthProvider } from "./store/auth-context.jsx";
 import CheckoutForm from "./components/CheckoutForm.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
-import Profile from "./components/Profile.jsx";
+import Profile, { profileAction, profileLoader } from "./components/Profile.jsx";
 import Orders from "./components/Orders.jsx";
 
 import Messages from "./components/admin/Messages.jsx";
@@ -42,12 +42,17 @@ const routeDefinitions = createRoutesFromElements(
     <Route path="/products/:productId" element={<ProductDetail />} />
     <Route element={<ProtectedRoute />}>
       <Route path="/checkout" element={<CheckoutForm />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route
+        path="/profile"
+        element={<Profile />}
+        loader={profileLoader}
+        action={profileAction}
+      />
       <Route path="/orders" element={<Orders />} />
       <Route path="/admin/orders" element={<AdminOrder />} />
       <Route path="/admin/messages" element={<Messages />} />
     </Route>
-  </Route>
+  </Route>,
 );
 
 const appRouter = createBrowserRouter(routeDefinitions);
@@ -69,5 +74,5 @@ createRoot(document.getElementById("root")).render(
       theme={localStorage.getItem("theme") === "dark" ? "dark" : "light"}
       transition={Bounce}
     />
-  </StrictMode>
+  </StrictMode>,
 );
