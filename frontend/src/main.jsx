@@ -47,6 +47,9 @@ const routeDefinitions = createRoutesFromElements(
         element={<Profile />}
         loader={profileLoader}
         action={profileAction}
+        shouldRevalidate={({ actionResult }) => {
+          return !actionResult?.success;
+        }}
       />
       <Route path="/orders" element={<Orders />} />
       <Route path="/admin/orders" element={<AdminOrder />} />
