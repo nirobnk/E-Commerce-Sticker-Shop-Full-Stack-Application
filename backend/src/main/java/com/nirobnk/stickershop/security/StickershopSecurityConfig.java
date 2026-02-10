@@ -45,7 +45,8 @@ public class StickershopSecurityConfig {
                 .authorizeHttpRequests((requests) -> {
                             publicPaths.forEach(path ->
                                     requests.requestMatchers(path).permitAll());
-                            requests.anyRequest().authenticated();
+                            requests.requestMatchers("/api/v1/admin/**").hasRole("ADMIN");
+                            requests.anyRequest().hasAnyRole("USER", "ADMIN");
                         }
                 )
                 .addFilterBefore(new JWTTokenValidatorFilter(publicPaths), BasicAuthenticationFilter.class)
