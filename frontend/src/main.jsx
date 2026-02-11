@@ -29,6 +29,10 @@ import Orders from "./components/Orders.jsx";
 import Messages from "./components/admin/Messages.jsx";
 import Register, { registerAction } from "./components/Register.jsx";
 import AdminOrder from "./components/admin/AdminOrder.jsx";
+import {loadStripe} from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
 
 const routeDefinitions = createRoutesFromElements(
   <Route path="/" element={<App />} errorElement={<ErrorPage />}>
@@ -62,6 +66,7 @@ const appRouter = createBrowserRouter(routeDefinitions);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    <Elements stripe={stripePromise}>
     <AuthProvider>
       <CartProvider>
         <RouterProvider router={appRouter} />
@@ -77,5 +82,6 @@ createRoot(document.getElementById("root")).render(
       theme={localStorage.getItem("theme") === "dark" ? "dark" : "light"}
       transition={Bounce}
     />
+    </Elements>
   </StrictMode>,
 );
