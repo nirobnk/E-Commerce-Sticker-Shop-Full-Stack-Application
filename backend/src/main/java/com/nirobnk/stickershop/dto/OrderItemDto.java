@@ -1,4 +1,6 @@
 package com.nirobnk.stickershop.dto;
 
-public class OrderItemDto {
+import java.math.BigDecimal;
+
+public record OrderItemDto(Long productId, Integer quantity, BigDecimal price) {
 }

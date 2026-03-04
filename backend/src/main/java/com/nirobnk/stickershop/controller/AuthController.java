@@ -1,13 +1,10 @@
 package com.nirobnk.stickershop.controller;
 
-
-import com.nirobnk.stickershop.dto.LoginRequestDto;
-import com.nirobnk.stickershop.dto.LoginResponseDto;
-import com.nirobnk.stickershop.dto.RegisterRequestDto;
-import com.nirobnk.stickershop.dto.UserDto;
+import com.nirobnk.stickershop.dto.*;
 import com.nirobnk.stickershop.entity.Customer;
 import com.nirobnk.stickershop.entity.Role;
 import com.nirobnk.stickershop.repository.CustomerRepository;
+import com.nirobnk.stickershop.repository.RoleRepository;
 import com.nirobnk.stickershop.util.JwtUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -41,6 +38,7 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final CustomerRepository customerRepository;
+    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
     private final CompromisedPasswordChecker compromisedPasswordChecker;
     private final JwtUtil jwtUtil;
@@ -57,6 +55,11 @@ public class AuthController {
             BeanUtils.copyProperties(loggedInUser, userDto);
             userDto.setRoles(authentication.getAuthorities().stream().map(
                     GrantedAuthority::getAuthority).collect(Collectors.joining(",")));
+            if (loggedInUser.getAddress() != null) {
+                AddressDto addressDto = new AddressDto();
+                BeanUtils.copyProperties(loggedInUser.getAddress(), addressDto);
+                userDto.setAddress(addressDto);
+            }
             String jwtToken = jwtUtil.generateJwtToken(authentication);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new LoginResponseDto(HttpStatus.OK.getReasonPhrase(),
@@ -100,9 +103,8 @@ public class AuthController {
         Customer customer = new Customer();
         BeanUtils.copyProperties(registerRequestDto, customer);
         customer.setPasswordHash(passwordEncoder.encode(registerRequestDto.getPassword()));
-        Role role = new Role();
-        role.setName("ROLE_USER");
-        customer.setRoles(Set.of(role));
+        roleRepository.findByName("ROLE_USER").ifPresent(role->customer.setRoles(Set.of(role)));
+
         customerRepository.save(customer);
         return ResponseEntity
                 .status(HttpStatus.CREATED)

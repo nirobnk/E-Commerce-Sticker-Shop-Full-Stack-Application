@@ -1,4 +1,4 @@
 package com.nirobnk.stickershop.dto;
 
-public record PaymentIntentResponseDto() {
+public record PaymentIntentResponseDto(String clientSecret) {
 }

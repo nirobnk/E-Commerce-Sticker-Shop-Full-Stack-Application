@@ -26,7 +26,6 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ProductDto>> getProducts() {
         List<ProductDto> productList = iProductService.getProducts();
-        System.out.println("testing dev tool12");
         return ResponseEntity.ok(productList);
     }
 }

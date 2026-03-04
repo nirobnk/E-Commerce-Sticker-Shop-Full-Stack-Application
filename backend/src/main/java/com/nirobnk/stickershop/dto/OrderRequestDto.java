@@ -1,4 +1,8 @@
 package com.nirobnk.stickershop.dto;
 
-public record OrderRequestDto() {
+import java.math.BigDecimal;
+import java.util.List;
+
+public record OrderRequestDto(BigDecimal totalPrice,
+                              String paymentId, String paymentStatus, List<OrderItemDto> items) {
 }

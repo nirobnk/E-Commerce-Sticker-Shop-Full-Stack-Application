@@ -1,4 +1,4 @@
 package com.nirobnk.stickershop.dto;
 
-public class ResponseDto {
+public record ResponseDto(String statusCode, String statusMsg) {
 }

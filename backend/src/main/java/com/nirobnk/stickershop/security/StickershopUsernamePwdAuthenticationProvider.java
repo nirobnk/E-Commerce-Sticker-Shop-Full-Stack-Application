@@ -4,7 +4,6 @@ package com.nirobnk.stickershop.security;
 
 
 
-
 import com.nirobnk.stickershop.entity.Customer;
 import com.nirobnk.stickershop.entity.Role;
 import com.nirobnk.stickershop.repository.CustomerRepository;
@@ -14,11 +13,13 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
