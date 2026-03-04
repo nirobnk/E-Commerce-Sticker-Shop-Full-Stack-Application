@@ -173,3 +173,58 @@ select:focus {
 .animate-fade-in {
   animation: fade-in 0.2s ease-out;
 }
+
+/* Floating animations for hero stickers */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-delayed-1 {
+  animation: float 7s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.animate-float-delayed-2 {
+  animation: float 6.5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.animate-float-delayed-3 {
+  animation: float 7.5s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.animate-float-delayed-4 {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.animate-float-delayed-5 {
+  animation: float 7s ease-in-out infinite;
+  animation-delay: 2.5s;
+}
+
+.animate-float-delayed-6 {
+  animation: float 6.5s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+.animate-float-delayed-7 {
+  animation: float 7.5s ease-in-out infinite;
+  animation-delay: 3.5s;
+}
+
+.animate-float-delayed-8 {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 4s;
+}

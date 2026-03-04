@@ -44,86 +44,173 @@ export default function ProductDetail() {
   const handleViewCart = () => navigate("/cart");
 
   return (
-    <div className="min-h-[852px] flex items-center justify-center px-6 py-12 font-primary bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-darkbg dark:to-gray-900">
-      <div className="max-w-6xl w-full mx-auto flex flex-col md:flex-row md:space-x-10 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
-        {/* Product Image with Zoom Effect */}
-        <div
-          ref={zoomRef}
-          onMouseMove={isHovering ? handleMouseMove : null}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          className="w-full md:w-1/2 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg overflow-hidden bg-cover"
-          style={{
-            backgroundImage: `url(${product.imageUrl})`,
-            backgroundSize: isHovering ? "200%" : "cover",
-            backgroundPosition: backgroundPosition,
-          }}
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 px-6 py-12">
+      <div className="max-w-7xl mx-auto">
+        {/* Back Button */}
+        <Link
+          to="/home"
+          className="inline-flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent font-semibold mb-8 group transition-all duration-300"
         >
-          <img
-            src={product.imageUrl}
-            alt={product.name}
-            className="w-full h-full opacity-0"
+          <FontAwesomeIcon
+            icon={faArrowLeft}
+            className="transition-transform duration-300 group-hover:-translate-x-1"
           />
-        </div>
+          <span>Back to Products</span>
+        </Link>
 
-        {/* Product Details */}
-        <div className="w-full md:w-1/2 flex flex-col space-y-6 mt-8 md:mt-0">
-          <Link
-            to="/home"
-            className="inline-flex items-center text-primary dark:text-light font-medium hover:text-dark dark:hover:text-lighter"
-          >
-            <FontAwesomeIcon icon={faArrowLeft} className="mr-2" />
-            Back To All Products
-          </Link>
-
-          <div>
-            <h1 className="text-4xl font-extrabold text-primary dark:text-light mb-4">
-              {product.name}
-            </h1>
-            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
-              {product.description}
-            </p>
-            <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-6">
-              ${product.price}
-            </div>
-          </div>
-
-          <div className="flex flex-col space-y-5">
-            {/* Quantity Input */}
-            <div className="flex items-center space-x-4">
-              <label
-                htmlFor="quantity"
-                className="text-lg font-semibold text-primary dark:text-light"
+        {/* Product Detail Card */}
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden">
+          <div className="grid md:grid-cols-2 gap-0">
+            {/* Left - Product Image */}
+            <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 p-12">
+              <div
+                ref={zoomRef}
+                onMouseMove={isHovering ? handleMouseMove : null}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+                className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-xl cursor-zoom-in"
+                style={{
+                  backgroundImage: `url(${product.imageUrl})`,
+                  backgroundSize: isHovering ? "200%" : "contain",
+                  backgroundPosition: backgroundPosition,
+                  backgroundRepeat: "no-repeat",
+                }}
               >
-                Qty:
-              </label>
-              <input
-                type="number"
-                id="quantity"
-                min="1"
-                value={quantity}
-                onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-                className="w-24 px-4 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:border-primary dark:focus:border-accent focus:ring-4 focus:ring-cyan-100 dark:focus:ring-cyan-900 dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-center font-semibold transition-smooth"
-              />
+                <img
+                  src={product.imageUrl}
+                  alt={product.name}
+                  className="w-full h-full opacity-0"
+                />
+
+                {/* Zoom hint */}
+                <div className="absolute bottom-4 right-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-medium text-gray-700 dark:text-gray-300 shadow-lg">
+                  🔍 Hover to zoom
+                </div>
+              </div>
+
+              {/* Decorative elements */}
+              <div className="absolute top-8 left-8 w-20 h-20 bg-primary/10 rounded-full blur-2xl"></div>
+              <div className="absolute bottom-8 right-8 w-32 h-32 bg-accent/10 rounded-full blur-3xl"></div>
             </div>
 
-            {/* Add to Cart Button */}
-            <button
-              onClick={handleAddToCart}
-              className="w-full px-6 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-lg text-lg font-semibold hover:shadow-xl transition-smooth transform hover:-translate-y-0.5 btn-modern"
-            >
-              Add to Cart
-              <FontAwesomeIcon icon={faShoppingCart} className="ml-2" />
-            </button>
+            {/* Right - Product Info */}
+            <div className="p-12 flex flex-col justify-center">
+              {/* Product Name */}
+              <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 leading-tight">
+                {product.name}
+              </h1>
 
-            {/* View Cart Button */}
-            <button
-              onClick={handleViewCart}
-              className="w-full px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-lg text-lg font-semibold hover:shadow-xl transition-smooth transform hover:-translate-y-0.5"
-            >
-              View Cart
-              <FontAwesomeIcon icon={faShoppingBasket} className="ml-2" />
-            </button>
+              {/* Description */}
+              <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+                {product.description}
+              </p>
+
+              {/* Price */}
+              <div className="mb-8">
+                <span className="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wide block mb-2">
+                  Price
+                </span>
+                <div className="text-5xl font-extrabold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+                  ${product.price}
+                </div>
+              </div>
+
+              {/* Divider */}
+              <div className="h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent mb-8"></div>
+
+              {/* Quantity Selector */}
+              <div className="mb-6">
+                <label
+                  htmlFor="quantity"
+                  className="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wide block mb-3 font-semibold"
+                >
+                  Quantity
+                </label>
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-bold transition-all duration-300 hover:scale-110"
+                  >
+                    −
+                  </button>
+                  <input
+                    type="number"
+                    id="quantity"
+                    min="1"
+                    value={quantity}
+                    onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+                    className="w-20 h-12 text-center text-xl font-bold border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:border-primary dark:focus:border-accent focus:ring-4 focus:ring-primary/20 dark:bg-gray-700 text-gray-900 dark:text-white transition-all duration-300"
+                  />
+                  <button
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-bold transition-all duration-300 hover:scale-110"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="space-y-4">
+                {/* Add to Cart */}
+                <button
+                  onClick={handleAddToCart}
+                  className="group relative w-full px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl text-lg font-bold hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 transform hover:scale-105 overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-3">
+                    <FontAwesomeIcon
+                      icon={faShoppingCart}
+                      className="text-xl"
+                    />
+                    <span>Add to Cart</span>
+                  </span>
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                </button>
+
+                {/* View Cart */}
+                <button
+                  onClick={handleViewCart}
+                  className="w-full px-8 py-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl text-lg font-bold hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3"
+                >
+                  <FontAwesomeIcon
+                    icon={faShoppingBasket}
+                    className="text-xl"
+                  />
+                  <span>View Cart</span>
+                </button>
+              </div>
+
+              {/* Product Features */}
+              <div className="mt-8 grid grid-cols-2 gap-4">
+                <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+                  <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+                    <span className="text-lg">✓</span>
+                  </div>
+                  <div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      Quality
+                    </div>
+                    <div className="font-bold text-gray-900 dark:text-white">
+                      Premium
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+                  <div className="w-10 h-10 bg-accent/10 rounded-full flex items-center justify-center">
+                    <span className="text-lg">🚚</span>
+                  </div>
+                  <div>
+                    <div className="text-xs text-gray-500 dark:text-gray-400">
+                      Shipping
+                    </div>
+                    <div className="font-bold text-gray-900 dark:text-white">
+                      Free
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

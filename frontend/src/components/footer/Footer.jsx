@@ -13,10 +13,13 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectIsAuthenticated } from "../../store/auth-slice";
 import "./footer.css";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
+  const isAuthenticated = useSelector(selectIsAuthenticated);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -27,35 +30,36 @@ export default function Footer() {
 
   return (
     <footer className="modern-footer">
-      {/* Newsletter Section */}
-      <div className="newsletter-section">
-        <div className="newsletter-content">
-          <div className="newsletter-text">
-            <h3 className="newsletter-title">Subscribe to Our Newsletter</h3>
-            <p className="newsletter-description">
-              Get 10% off your first order and stay updated on new products and
-              exclusive offers!
-            </p>
-          </div>
-          <form onSubmit={handleSubscribe} className="newsletter-form">
-            <div className="newsletter-input-wrapper">
-              <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
-              <input
-                type="email"
-                placeholder="Enter your email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="newsletter-input"
-              />
+      {/* Newsletter Section - Only show for non-logged-in users */}
+      {!isAuthenticated && <div className="newsletter-section">
+          <div className="newsletter-content">
+            <div className="newsletter-text">
+              <h3 className="newsletter-title">Subscribe to Our Newsletter</h3>
+              <p className="newsletter-description">
+                Get 10% off your first order and stay updated on new products and
+                exclusive offers!
+              </p>
+            </div>
+            <form onSubmit={handleSubscribe} className="newsletter-form">
+              <div className="newsletter-input-wrapper">
+                <FontAwesomeIcon icon={faEnvelope} className="input-icon" />
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="newsletter-input"
+                />
               <button type="submit" className="newsletter-button">
                 Subscribe
                 <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
               </button>
             </div>
-          </form>
+            </form>
+          </div>
         </div>
-      </div>
+      }
 
       {/* Main Footer Content */}
       <div className="footer-main">
