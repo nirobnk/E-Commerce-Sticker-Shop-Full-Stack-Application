@@ -53,11 +53,11 @@ export default function Register() {
   const labelStyle =
     "block text-lg font-semibold text-primary dark:text-light mb-2";
   const textFieldStyle =
-    "w-full px-4 py-2 text-base border rounded-md transition border-primary dark:border-light focus:ring focus:ring-dark dark:focus:ring-lighter focus:outline-none text-gray-800 dark:text-lighter bg-white dark:bg-gray-600 placeholder-gray-400 dark:placeholder-gray-300";
+    "w-full px-4 py-3 text-base border-2 rounded-lg transition-smooth border-gray-300 dark:border-gray-600 focus:border-primary dark:focus:border-accent focus:ring-4 focus:ring-cyan-100 dark:focus:ring-cyan-900 focus:outline-none text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-700 placeholder-gray-400";
 
   return (
-    <div className="min-h-[752px] flex items-center justify-center font-primary dark:bg-darkbg">
-      <div className="bg-white dark:bg-gray-700 shadow-md rounded-lg max-w-md w-full px-8 py-6">
+    <div className="min-h-[752px] flex items-center justify-center font-primary bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-darkbg dark:to-gray-900 py-12">
+      <div className="bg-white dark:bg-gray-800 shadow-2xl rounded-2xl max-w-md w-full px-10 py-8">
         <PageTitle title="Register" />
 
         <Form
@@ -172,18 +172,18 @@ export default function Register() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full px-6 py-2 text-white dark:text-black text-xl bg-primary dark:bg-light hover:bg-dark dark:hover:bg-lighter rounded-md transition duration-200"
+            className="w-full px-6 py-3 text-white text-lg font-semibold rounded-lg transition-smooth bg-gradient-to-r from-primary to-accent hover:from-dark hover:to-primary hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed btn-modern"
           >
             {isSubmitting ? "Registering..." : "Register"}
           </button>
         </Form>
 
         {/* Login Link */}
-        <p className="text-center text-gray-600 dark:text-gray-400 mt-4">
+        <p className="text-center text-gray-600 dark:text-gray-400 mt-6">
           Already have an account?{" "}
           <Link
             to="/login"
-            className="text-primary dark:text-light hover:text-dark dark:hover:text-primary transition duration-200"
+            className="text-primary dark:text-accent hover:text-accent dark:hover:text-light transition-smooth font-semibold"
           >
             Login Here
           </Link>
@@ -212,7 +212,7 @@ export async function registerAction({ request }) {
       error.response?.data?.errorMessage ||
         error.message ||
         "Failed to submit your message. Please try again.",
-      { status: error.status || 500 }
+      { status: error.status || 500 },
     );
   }
 }

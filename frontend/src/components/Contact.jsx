@@ -93,10 +93,10 @@ export default function Contact() {
               required
             />
             {actionData?.errors?.email && (
-            <p className="text-red-500 text-sm mt-1">
-              {actionData.errors.email}
-            </p>
-          )}
+              <p className="text-red-500 text-sm mt-1">
+                {actionData.errors.email}
+              </p>
+            )}
           </div>
 
           {/* Mobile Field */}
@@ -115,10 +115,10 @@ export default function Contact() {
               className={textFieldStyle}
             />
             {actionData?.errors?.mobileNumber && (
-            <p className="text-red-500 text-sm mt-1">
-              {actionData.errors.mobileNumber}
-            </p>
-          )}
+              <p className="text-red-500 text-sm mt-1">
+                {actionData.errors.mobileNumber}
+              </p>
+            )}
           </div>
         </div>
 
@@ -145,11 +145,11 @@ export default function Contact() {
         </div>
 
         {/* Submit Button */}
-        <div className="text-center">
+        <div className="text-center pt-4">
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-6 py-2 text-white dark:text-black text-xl rounded-md transition duration-200 bg-primary dark:bg-light hover:bg-dark dark:hover:bg-lighter"
+            className="px-8 py-3 text-white text-lg font-semibold rounded-lg transition-smooth bg-gradient-to-r from-primary to-accent hover:from-dark hover:to-primary hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed btn-modern"
           >
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>

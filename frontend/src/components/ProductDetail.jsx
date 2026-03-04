@@ -5,10 +5,11 @@ import {
   faShoppingBasket,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
-import { useCart } from "../store/cart-context";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cart-slice.js";
 
 export default function ProductDetail() {
   const location = useLocation();
@@ -18,11 +19,11 @@ export default function ProductDetail() {
   const zoomRef = useRef(null);
   const [isHovering, setIsHovering] = useState(false);
   const [backgroundPosition, setBackgroundPosition] = useState("center");
-  const { addToCart } = useCart();
+  const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-    if(quantity < 1) return;
-    addToCart(product, quantity);
+    if (quantity < 1) return;
+    dispatch(addToCart({ product, quantity }));
   };
 
   const handleMouseMove = (e) => {
@@ -43,8 +44,8 @@ export default function ProductDetail() {
   const handleViewCart = () => navigate("/cart");
 
   return (
-    <div className="min-h-[852px] flex items-center justify-center px-6 py-8 font-primary bg-normalbg dark:bg-darkbg">
-      <div className="max-w-5xl w-full mx-auto flex flex-col md:flex-row md:space-x-8 px-6 p-8">
+    <div className="min-h-[852px] flex items-center justify-center px-6 py-12 font-primary bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-darkbg dark:to-gray-900">
+      <div className="max-w-6xl w-full mx-auto flex flex-col md:flex-row md:space-x-10 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
         {/* Product Image with Zoom Effect */}
         <div
           ref={zoomRef}
@@ -76,23 +77,23 @@ export default function ProductDetail() {
           </Link>
 
           <div>
-            <h1 className="text-3xl font-extrabold text-primary dark:text-light mb-4">
+            <h1 className="text-4xl font-extrabold text-primary dark:text-light mb-4">
               {product.name}
             </h1>
-            <p className="text-lg text-dark dark:text-lighter mb-4">
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
               {product.description}
             </p>
-            <div className="text-2xl font-bold text-primary dark:text-light">
+            <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-6">
               ${product.price}
             </div>
           </div>
 
-          <div className="flex flex-col space-y-4">
+          <div className="flex flex-col space-y-5">
             {/* Quantity Input */}
             <div className="flex items-center space-x-4">
               <label
                 htmlFor="quantity"
-                className="text-primary dark:text-light"
+                className="text-lg font-semibold text-primary dark:text-light"
               >
                 Qty:
               </label>
@@ -102,13 +103,15 @@ export default function ProductDetail() {
                 min="1"
                 value={quantity}
                 onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-                className="w-16 px-2 py-1 border rounded-md focus:ring focus:ring-light dark:focus:ring-gray-600 dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                className="w-24 px-4 py-2 border-2 border-gray-300 dark:border-gray-600 rounded-lg focus:border-primary dark:focus:border-accent focus:ring-4 focus:ring-cyan-100 dark:focus:ring-cyan-900 dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-center font-semibold transition-smooth"
               />
             </div>
 
             {/* Add to Cart Button */}
-            <button onClick ={handleAddToCart}
-             className="w-full px-4 py-2 bg-primary dark:bg-light text-white dark:text-black rounded-md text-lg font-semibold hover:bg-dark dark:hover:bg-lighter transition">
+            <button
+              onClick={handleAddToCart}
+              className="w-full px-6 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-lg text-lg font-semibold hover:shadow-xl transition-smooth transform hover:-translate-y-0.5 btn-modern"
+            >
               Add to Cart
               <FontAwesomeIcon icon={faShoppingCart} className="ml-2" />
             </button>
@@ -116,7 +119,7 @@ export default function ProductDetail() {
             {/* View Cart Button */}
             <button
               onClick={handleViewCart}
-              className="w-full px-4 py-2 bg-primary dark:bg-light text-white dark:text-black rounded-md text-lg font-semibold hover:bg-dark dark:hover:bg-lighter transition"
+              className="w-full px-6 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-white rounded-lg text-lg font-semibold hover:shadow-xl transition-smooth transform hover:-translate-y-0.5"
             >
               View Cart
               <FontAwesomeIcon icon={faShoppingBasket} className="ml-2" />

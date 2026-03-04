@@ -7,12 +7,12 @@ export default function Dropdown({
   handleSort,
 }) {
   return (
-    <div className="flex items-center gap-2 justify-end pr-12 flex-1 font-primary">
-      <label className="text-lg font-semibold text-primary dark:text-light">
+    <div className="flex items-center gap-3 justify-end pr-12 flex-1 font-primary">
+      <label className="text-lg font-bold text-primary dark:text-light">
         {label}
       </label>
       <select
-        className="px-3 py-2 text-base border rounded-md transition border-primary dark:border-light focus:ring focus:ring-dark  dark:focus:ring-lighter focus:outline-none text-gray-800 dark:text-lighter"
+        className="px-4 py-2.5 text-base border-2 rounded-lg transition-smooth border-gray-300 dark:border-gray-600 focus:border-primary dark:focus:border-accent focus:ring-4 focus:ring-cyan-100 dark:focus:ring-cyan-900 focus:outline-none text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-700 shadow-sm cursor-pointer"
         value={selectedValue}
         onChange={(event) => handleSort(event.target.value)}
       >

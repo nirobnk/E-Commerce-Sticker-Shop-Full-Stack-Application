@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { useAuth } from "../store/auth-context";
+import { selectUser } from "../store/auth-slice";
 import apiClient from "../api/apiClient";
-import { useCart } from "../store/cart-context";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  selectCartItems,
+  selectTotalPrice,
+  clearCart,
+} from "../store/cart-slice";
 import {
   useStripe,
   useElements,
@@ -14,8 +19,10 @@ import PageTitle from "./PageTitle";
 import { toast } from "react-toastify";
 
 export default function CheckoutForm() {
-  const { user } = useAuth();
-  const { cart, totalPrice, clearCart } = useCart();
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const cart = useSelector(selectCartItems);
+  const totalPrice = useSelector(selectTotalPrice);
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
@@ -105,7 +112,7 @@ export default function CheckoutForm() {
               },
             },
           },
-        }
+        },
       );
 
       if (error) {
@@ -124,7 +131,7 @@ export default function CheckoutForm() {
             })),
           });
           sessionStorage.setItem("skipRedirectPath", "true");
-          clearCart();
+          dispatch(clearCart());
           navigate("/order-success");
         } catch (orderError) {
           console.error("Failed to create order:", orderError);
@@ -140,15 +147,15 @@ export default function CheckoutForm() {
   };
 
   return (
-    <div className="min-h-[852px] flex items-center justify-center font-primary dark:bg-darkbg">
+    <div className="min-h-[852px] flex items-center justify-center font-primary bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-darkbg dark:to-gray-900 py-12">
       <div
         className={
           isProcessing
-            ? "visible  flex flex-col justify-center items-center my-[200px] "
+            ? "visible flex flex-col justify-center items-center my-[200px]"
             : "hidden"
         }
       >
-        <p className="mt-4 text-2xl font-normal text-primary dark:text-light">
+        <p className="mt-4 text-3xl font-bold text-primary dark:text-accent animate-pulse">
           Processing Payment.... Don't refresh the page
         </p>
       </div>
@@ -156,13 +163,16 @@ export default function CheckoutForm() {
         className={
           isProcessing
             ? "hidden"
-            : "visible bg-white dark:bg-gray-700 shadow-md rounded-lg max-w-md w-full px-8 py-6"
+            : "visible bg-white dark:bg-gray-800 shadow-2xl rounded-2xl max-w-lg w-full px-10 py-8"
         }
       >
         <PageTitle title="Complete Your Payment" />
 
-        <p className="text-center mt-8 text-lg text-gray-600 dark:text-lighter mb-8">
-          Amount to be charged: <strong>${totalPrice.toFixed(2)}</strong>
+        <p className="text-center mt-8 text-xl text-gray-700 dark:text-gray-300 mb-8">
+          Amount to be charged:{" "}
+          <strong className="text-primary dark:text-accent text-2xl">
+            ${totalPrice.toFixed(2)}
+          </strong>
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -226,11 +236,11 @@ export default function CheckoutForm() {
           </div>
 
           {/* Submit Button */}
-          <div>
+          <div className="pt-2">
             <button
               type="submit"
               disabled={!stripe || isProcessing}
-              className="w-full px-6 py-2 mt-6 text-white dark:text-black text-xl bg-primary dark:bg-light hover:bg-dark dark:hover:bg-lighter rounded-md transition duration-200"
+              className="w-full px-6 py-3 mt-6 text-white text-lg font-semibold rounded-lg transition-smooth bg-gradient-to-r from-primary to-accent hover:from-dark hover:to-primary hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed btn-modern"
             >
               {isProcessing ? "Payment processing..." : "Pay Now"}
             </button>
