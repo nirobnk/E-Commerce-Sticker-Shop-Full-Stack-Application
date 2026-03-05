@@ -3,25 +3,15 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   selectCartItems,
   addToCart,
-  clearCart,
   removeFromCart,
 } from "../store/cart-slice.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTimes,
-  faPlus,
-  faMinus,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faMinus, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 export default function CartTable() {
   const dispatch = useDispatch();
   const cart = useSelector(selectCartItems);
-
-  const subtotal = cart
-    .reduce((acc, item) => acc + item.price * item.quantity, 0)
-    .toFixed(2);
 
   const updateCartQuantity = (productId, quantity) => {
     if (quantity < 1) return; // Prevent quantity from going below 1
@@ -151,26 +141,6 @@ export default function CartTable() {
             ))}
           </tbody>
         </table>
-
-        {/* Subtotal Section */}
-        {cart.length > 0 && (
-          <div className="bg-gradient-to-r from-cyan-50 via-blue-50 to-indigo-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-800 border-t-2 border-cyan-500/30 dark:border-cyan-600/30 px-6 py-6">
-            <div className="flex justify-end items-center gap-8">
-              <div className="text-right">
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                  Subtotal ({cart.length} {cart.length === 1 ? "item" : "items"}
-                  )
-                </p>
-                <p className="text-4xl font-black bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
-                  ${subtotal}
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                  Taxes calculated at checkout
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* Mobile View */}
@@ -240,25 +210,6 @@ export default function CartTable() {
             </div>
           </div>
         ))}
-
-        {/* Mobile Subtotal */}
-        {cart.length > 0 && (
-          <div className="bg-gradient-to-r from-cyan-50 via-blue-50 to-indigo-50 dark:from-gray-800 dark:via-gray-800 dark:to-gray-800 rounded-xl p-6 shadow-lg border-2 border-cyan-500/30 dark:border-cyan-600/30">
-            <div className="flex justify-between items-center">
-              <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Subtotal ({cart.length} items)
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
-                  Taxes at checkout
-                </p>
-              </div>
-              <p className="text-3xl font-black bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
-                ${subtotal}
-              </p>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

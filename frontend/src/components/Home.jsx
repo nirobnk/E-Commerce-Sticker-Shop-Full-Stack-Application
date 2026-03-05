@@ -43,7 +43,7 @@ export default function Home() {
                 Express Yourself with
                 <span className="block text-yellow-300">Premium Stickers</span>
               </h1>
-              <p className="text-xl md:text-2xl mb-8 text-blue-50 leading-relaxed">
+              <p className="text-xl md:text-2xl mb-8 text-blue-50 leading-7">
                 Discover unique, high-quality stickers that bring your
                 personality to life. Perfect for laptops, water bottles, and
                 more!
@@ -180,7 +180,7 @@ export default function Home() {
                 Secure Payments
               </h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
-                100% Secure Payment with 256-bit SSL encryption
+                100% Secure Payment with SSL certification
               </p>
             </div>
 

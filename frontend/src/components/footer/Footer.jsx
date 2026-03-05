@@ -189,8 +189,7 @@ export default function Footer() {
             © {new Date().getFullYear()} StickerVault. All rights reserved.
           </p>
           <p className="built-with">
-            Built with
-            <FontAwesomeIcon icon={faHeart} className="heart-icon" />
+            Built
             by
             <a
               href="https://nirobnk.com/"

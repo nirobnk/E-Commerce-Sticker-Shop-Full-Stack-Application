@@ -2,70 +2,93 @@ import React from "react";
 import PageTitle from "./PageTitle";
 
 export default function About() {
-  const h3Style = "text-xl font-bold text-primary dark:text-light mb-3";
-  const pStyle = "text-gray-700 dark:text-gray-300 text-base leading-relaxed";
-
   return (
-    <div className="max-w-[1152px] min-h-[852px] mx-auto px-6 py-12 font-primary">
-      <PageTitle title="About Us" />
-      {/* About Us Content */}
-      <p className="leading-7 mb-8 text-gray-700 dark:text-gray-300 text-lg">
-        <span className="text-xl font-bold text-primary dark:text-light">
-          StickerVault
-        </span>{" "}
-        is your premier destination for premium, high-quality stickers and
-        creative designs. We're dedicated to bringing you the finest collection
-        of stickers that combine artistic expression with exceptional
-        durability!
-      </p>
+    <div className="max-w-4xl mx-auto px-6 py-3 font-primary">
+      <PageTitle title="About StickerVault" />
 
-      {/* Why Choose Us Section */}
-      <h2 className="text-3xl leading-10 font-bold text-primary dark:text-light mb-8">
-        Why Choose StickerVault?
-      </h2>
+      {/* Intro */}
+      <div className="mt-9 space-y-6 text-small leading-5 text-gray-700 dark:text-gray-300">
+        <p>
+          StickerVault started with a simple idea — stickers should be more
+          than just decoration. They’re a small way to express personality,
+          creativity, and sometimes even a little humor.
+        </p>
 
-      {/* Features */}
-      <div className="grid md:grid-cols-2 gap-8">
-        {/* Feature: Premium Quality */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-smooth">
-          <h3 className={h3Style}>🏆 Premium Quality</h3>
-          <p className={pStyle}>
-            We strive to provide every customer with the utmost satisfaction by
-            delivering high-quality vinyl stickers crafted with care and
-            precision.
-          </p>
+        <p>
+          Whether it's on a laptop, water bottle, notebook, or phone case, the
+          right sticker can say a lot about you. We created StickerVault to
+          make it easier to find designs that actually feel personal.
+        </p>
+
+        <p>
+          Our goal is simple: offer well-designed stickers that look great,
+          last long, and make everyday items a little more fun.
+        </p>
+      </div>
+
+      {/* Section */}
+      <div className="mt-16">
+        <h2 className="text-2xl font-semibold text-primary dark:text-light mb-10">
+          What We Focus On
+        </h2>
+
+        <div className="grid md:grid-cols-2 gap-x-10 gap-y-10">
+          {/* Quality */}
+          <div>
+            <h3 className="text-lg font-semibold text-primary dark:text-light mb-3">
+              Quality That Lasts
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-6">
+              Our stickers are printed on durable vinyl with strong adhesive.
+              They’re waterproof, scratch-resistant, and made to stay vibrant
+              even after everyday use.
+            </p>
+          </div>
+
+          {/* Designs */}
+          <div>
+            <h3 className="text-lg font-semibold text-primary dark:text-light mb-3">
+              Designs People Actually Want
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-6">
+              We try to keep our collection fun and relatable. From minimal
+              designs to funny and quirky ones, there’s something for every
+              kind of sticker lover.
+            </p>
+          </div>
+
+          {/* Experience */}
+          <div>
+            <h3 className="text-lg font-semibold text-primary dark:text-light mb-3">
+              A Simple Shopping Experience
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-6">
+              We believe buying stickers should be simple and enjoyable. That’s
+              why we focus on keeping the experience clean, easy, and
+              straightforward.
+            </p>
+          </div>
+
+          {/* Growing */}
+          <div>
+            <h3 className="text-lg font-semibold text-primary dark:text-light mb-3">
+              Always Adding New Ideas
+            </h3>
+            <p className="text-gray-700 dark:text-gray-300 leading-6">
+              StickerVault is constantly growing. New designs and collections
+              are added regularly so there’s always something new to discover.
+            </p>
+          </div>
         </div>
+      </div>
 
-        {/* Feature: Product Innovation */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-smooth">
-          <h3 className={h3Style}>🚀 Product Innovation</h3>
-          <p className={pStyle}>
-            Our vinyl stickers feature a premium matte or glossy finish
-            lamination and are made with advanced adhesive technology. Designed
-            to withstand all weather conditions and resist scratches, our
-            stickers are gentle enough to preserve the surface of your beloved
-            gadgets.
-          </p>
-        </div>
-
-        {/* Feature: Excellent Service */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-smooth">
-          <h3 className={h3Style}>⭐ Excellent Service</h3>
-          <p className={pStyle}>
-            Customer satisfaction is our top priority, and we’re committed to
-            delivering an exceptional shopping experience.
-          </p>
-        </div>
-
-        {/* Feature: Designs You’ll Love */}
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-smooth">
-          <h3 className={h3Style}>🎨 Designs You'll Love</h3>
-          <p className={pStyle}>
-            With over 1,000 designs, our collection ranges from relatable and
-            seriously funny to delightfully quirky. And we’re just getting
-            started—stay tuned for more exciting products and designs!
-          </p>
-        </div>
+      {/* Closing */}
+      <div className="mt-20 my-7 border-t border-gray-200 dark:border-gray-700 pt-10">
+        <p className="text-gray-700 dark:text-gray-300 text-lg leading-8 font-semibold">
+          Thanks for stopping by StickerVault. We hope you find something that
+          makes your laptop, notebook, or favorite gadget feel a little more
+          like yours.
+        </p>
       </div>
     </div>
   );
