@@ -44,12 +44,12 @@ export default function ProductDetail() {
   const handleViewCart = () => navigate("/cart");
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 px-6 py-12">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 px-4 py-6">
+      <div className="max-w-6xl mx-auto">
         {/* Back Button */}
         <Link
           to="/home"
-          className="inline-flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent font-semibold mb-8 group transition-all duration-300"
+          className="inline-flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-accent font-semibold text-sm mb-4 group transition-all duration-300"
         >
           <FontAwesomeIcon
             icon={faArrowLeft}
@@ -59,10 +59,10 @@ export default function ProductDetail() {
         </Link>
 
         {/* Product Detail Card */}
-        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl overflow-hidden">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden">
           <div className="grid md:grid-cols-2 gap-0">
             {/* Left - Product Image */}
-            <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 p-12">
+            <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 p-6">
               <div
                 ref={zoomRef}
                 onMouseMove={isHovering ? handleMouseMove : null}
@@ -94,32 +94,32 @@ export default function ProductDetail() {
             </div>
 
             {/* Right - Product Info */}
-            <div className="p-12 flex flex-col justify-center">
+            <div className="p-6 flex flex-col justify-center">
               {/* Product Name */}
-              <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 leading-tight">
+              <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-3 leading-tight">
                 {product.name}
               </h1>
 
               {/* Description */}
-              <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed">
+              <p className="text-base text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
                 {product.description}
               </p>
 
               {/* Price */}
-              <div className="mb-8">
-                <span className="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wide block mb-2">
+              <div className="mb-6">
+                <span className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide block mb-1">
                   Price
                 </span>
-                <div className="text-5xl font-extrabold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+                <div className="text-4xl font-extrabold bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
                   ${product.price}
                 </div>
               </div>
 
               {/* Divider */}
-              <div className="h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent mb-8"></div>
+              <div className="h-px bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-600 to-transparent mb-6"></div>
 
               {/* Quantity Selector */}
-              <div className="mb-6">
+              <div className="mb-5">
                 <label
                   htmlFor="quantity"
                   className="text-sm text-gray-500 dark:text-gray-400 uppercase tracking-wide block mb-3 font-semibold"
@@ -151,11 +151,11 @@ export default function ProductDetail() {
               </div>
 
               {/* Action Buttons */}
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {/* Add to Cart */}
                 <button
                   onClick={handleAddToCart}
-                  className="group relative w-full px-8 py-4 bg-gradient-to-r from-primary to-accent text-white rounded-xl text-lg font-bold hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 transform hover:scale-105 overflow-hidden"
+                  className="group relative w-full px-6 py-3 bg-gradient-to-r from-primary to-accent text-white rounded-xl text-base font-bold hover:shadow-2xl hover:shadow-primary/30 transition-all duration-300 transform hover:scale-105 overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-3">
                     <FontAwesomeIcon
@@ -171,7 +171,7 @@ export default function ProductDetail() {
                 {/* View Cart */}
                 <button
                   onClick={handleViewCart}
-                  className="w-full px-8 py-4 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl text-lg font-bold hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3"
+                  className="w-full px-6 py-3 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white rounded-xl text-base font-bold hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3"
                 >
                   <FontAwesomeIcon
                     icon={faShoppingBasket}
@@ -182,7 +182,7 @@ export default function ProductDetail() {
               </div>
 
               {/* Product Features */}
-              <div className="mt-8 grid grid-cols-2 gap-4">
+              <div className="mt-6 grid grid-cols-2 gap-3">
                 <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
                   <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
                     <span className="text-lg">✓</span>

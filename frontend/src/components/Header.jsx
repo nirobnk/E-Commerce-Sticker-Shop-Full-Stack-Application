@@ -37,14 +37,21 @@ export default function Header() {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const user = useSelector(selectUser);
   const isAdmin = user?.roles?.includes("ROLE_ADMIN");
+
   useEffect(() => {
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
+  }, [theme]);
+
+  useEffect(() => {
     setAdminMenuOpen(false);
     setUserMenuOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
     const handleClickOutside = (event) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
         setUserMenuOpen(false);
@@ -52,7 +59,10 @@ export default function Header() {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-  }, [theme, location.pathname]);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const toggleTheme = () => {
     setTheme((prevTheme) => {
@@ -79,9 +89,9 @@ export default function Header() {
     "flex items-center gap-3 w-full text-left px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gradient-to-r hover:from-cyan-50 hover:to-blue-50 dark:hover:from-gray-700 dark:hover:to-gray-600 transition-all duration-200";
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-lg border-b border-gray-200 dark:border-gray-700 shadow-sm">
-      <div className="max-w-[1400px] mx-auto px-6">
-        <div className="flex items-center justify-between h-20">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-50/95 dark:bg-slate-900/98 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-sm overflow-visible">
+      <div className="max-w-[1400px] mx-auto px-6 overflow-visible">
+        <div className="flex items-center justify-between h-20 overflow-visible">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
             <div className="w-10 h-10 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 shadow-lg">
@@ -93,7 +103,7 @@ export default function Header() {
           </Link>
 
           {/* Navigation */}
-          <nav className="flex items-center gap-8">
+          <nav className="flex items-center gap-8 overflow-visible">
             <ul className="hidden md:flex items-center gap-8">
               <li>
                 <NavLink
@@ -178,7 +188,7 @@ export default function Header() {
                     />
                   </button>
                   {isUserMenuOpen && (
-                    <div className="absolute right-0 mt-3 w-56 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden animate-fade-in">
+                    <div className="absolute right-0 mt-3 w-56 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden animate-fade-in z-[100]">
                       <div className="p-4 bg-gradient-to-r from-primary to-accent">
                         <p className="text-white font-bold text-sm">
                           {user.name}
@@ -230,6 +240,14 @@ export default function Header() {
                               </button>
                               {isAdminMenuOpen && (
                                 <ul className="bg-gray-50 dark:bg-gray-900">
+                                  <li>
+                                    <Link
+                                      to="/admin/products"
+                                      className="flex items-center gap-3 pl-12 pr-4 py-3 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary dark:hover:text-accent transition-colors"
+                                    >
+                                      <span>Manage Products</span>
+                                    </Link>
+                                  </li>
                                   <li>
                                     <Link
                                       to="/admin/orders"

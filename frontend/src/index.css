@@ -15,3 +15,48 @@
   --color-accent: #06b6d4;
   --color-secondary: #8b5cf6;
 }
+
+/* Prevent elastic/rubber band scrolling effect */
+html {
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+}
+
+body {
+  overscroll-behavior-y: none;
+  overscroll-behavior-x: none;
+  -webkit-overflow-scrolling: touch;
+  padding-top: 80px;
+}
+
+/* Note: scroll-behavior removed to prevent visible scrolling during navigation */
+/* Smooth scrolling can be added per-component for specific needs */
+
+/* Improve header performance and prevent bouncing */
+header {
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* Hardware acceleration for smooth fixed positioning */
+  /* Note: removed 'contain' property to allow dropdown menus to overflow */
+}
+
+/* Ensure main content doesn't jump with fixed header */
+#root {
+  isolation: isolate;
+}
+
+/* Smooth loading bar animation */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+}

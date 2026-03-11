@@ -34,35 +34,35 @@ export default function Cart() {
   const isCartEmpty = useMemo(() => cart.length === 0, [cart.length]);
 
   return (
-    <div className="min-h-[852px] py-12 bg-gradient-to-br from-slate-50 via-cyan-50/30 to-blue-50/40 dark:from-gray-900 dark:via-gray-900 dark:to-slate-900 font-primary">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-3 bg-gradient-to-br from-slate-50 via-cyan-50/30 to-blue-50/40 dark:from-gray-900 dark:via-gray-900 dark:to-slate-900 font-primary">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Enhanced Page Title */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-3">
           <PageTitle title="Shopping Cart" />
           {!isCartEmpty && (
-            <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
+            <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">
               {cart.length} {cart.length === 1 ? "item" : "items"} in your cart
             </p>
           )}
         </div>
 
         {!isCartEmpty ? (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
             {/* Left Side - Cart Table */}
             <div className="lg:col-span-2">
               {/* Address Warning Alert */}
               {isAddressIncomplete && (
-                <div className="mb-6 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-l-4 border-amber-500 dark:border-amber-600 rounded-lg p-4 shadow-md animate-pulse">
+                <div className="mb-2 bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 border-l-4 border-amber-500 dark:border-amber-600 rounded-lg p-2 shadow-md animate-pulse">
                   <div className="flex items-start">
                     <FontAwesomeIcon
                       icon={faExclamationTriangle}
-                      className="text-amber-600 dark:text-amber-500 text-xl mt-0.5 mr-3"
+                      className="text-amber-600 dark:text-amber-500 text-base mt-0.5 mr-2"
                     />
                     <div>
-                      <h3 className="font-bold text-amber-900 dark:text-amber-200 mb-1">
+                      <h3 className="font-bold text-amber-900 dark:text-amber-200 mb-0.5 text-sm">
                         Address Required
                       </h3>
-                      <p className="text-amber-800 dark:text-amber-300 text-sm">
+                      <p className="text-amber-800 dark:text-amber-300 text-xs">
                         Please update your address in your{" "}
                         <Link
                           to="/profile"
@@ -83,10 +83,10 @@ export default function Cart() {
 
             {/* Right Side - Order Summary & Actions */}
             <div className="lg:col-span-1">
-              <div className="sticky top-8 space-y-4">
+              <div className="sticky top-8 space-y-2">
                 {/* Order Summary Card */}
-                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-6">
-                  <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+                <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 p-3">
+                  <h2 className="text-base font-bold text-gray-800 dark:text-gray-200 mb-2 flex items-center gap-2">
                     <FontAwesomeIcon
                       icon={faShoppingCart}
                       className="text-cyan-600 dark:text-cyan-400"
@@ -94,25 +94,25 @@ export default function Cart() {
                     Order Summary
                   </h2>
 
-                  <div className="space-y-3 mb-4">
-                    <div className="flex justify-between text-gray-600 dark:text-gray-400">
+                  <div className="space-y-2 mb-2">
+                    <div className="flex justify-between text-gray-600 dark:text-gray-400 text-xs">
                       <span>Subtotal ({cart.length} items)</span>
                       <span className="font-semibold">
                         ${totalPrice.toFixed(2)}
                       </span>
                     </div>
-                    <div className="flex justify-between text-gray-600 dark:text-gray-400">
+                    <div className="flex justify-between text-gray-600 dark:text-gray-400 text-xs">
                       <span>Shipping</span>
                       <span className="font-semibold text-green-600 dark:text-green-400">
                         {totalPrice >= 50 ? "FREE" : "Calculated at checkout"}
                       </span>
                     </div>
-                    <div className="border-t border-gray-200 dark:border-gray-700 pt-3">
+                    <div className="border-t border-gray-200 dark:border-gray-700 pt-2">
                       <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-gray-800 dark:text-gray-200">
+                        <span className="text-sm font-bold text-gray-800 dark:text-gray-200">
                           Total
                         </span>
-                        <span className="text-2xl font-black bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                        <span className="text-lg font-black bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 dark:from-cyan-400 dark:via-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
                           ${totalPrice.toFixed(2)}
                         </span>
                       </div>
@@ -123,11 +123,11 @@ export default function Cart() {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     {/* Proceed to Checkout Button */}
                     <Link
                       to={isAddressIncomplete ? "#" : "/checkout"}
-                      className={`w-full py-3.5 px-6 text-base font-bold rounded-xl flex justify-center items-center gap-2 transition-all duration-300 transform ${
+                      className={`w-full py-2 px-4 text-sm font-bold rounded-xl flex justify-center items-center gap-2 transition-all duration-300 transform ${
                         isAddressIncomplete
                           ? "bg-gray-300 dark:bg-gray-700 cursor-not-allowed text-gray-500 dark:text-gray-500 opacity-60"
                           : "bg-gradient-to-r bg-blue-500 dark:from-cyan-600 dark:via-blue-600 dark:to-indigo-600 text-white hover:shadow-2xl hover:shadow-blue-500/50 dark:hover:shadow-blue-900/50 hover:-translate-y-1 group"
@@ -150,7 +150,7 @@ export default function Cart() {
                     {/* Continue Shopping Button */}
                     <Link
                       to="/home"
-                      className="w-full py-3 px-6 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 text-base font-semibold rounded-xl border-2 border-gray-300 dark:border-gray-600 hover:border-cyan-500 dark:hover:border-cyan-400 flex justify-center items-center gap-2 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group"
+                      className="w-full py-2 px-4 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 text-sm font-semibold rounded-xl border-2 border-gray-300 dark:border-gray-600 hover:border-cyan-500 dark:hover:border-cyan-400 flex justify-center items-center gap-2 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 group"
                     >
                       <FontAwesomeIcon
                         icon={faArrowLeft}
@@ -162,28 +162,28 @@ export default function Cart() {
                 </div>
 
                 {/* Trust Badges */}
-                <div className="bg-gradient-to-br from-cyan-50/50 to-blue-50/50 dark:from-gray-800/50 dark:to-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-700 p-4">
-                  <div className="space-y-3 text-sm">
-                    <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                <div className="bg-gradient-to-br from-cyan-50/50 to-blue-50/50 dark:from-gray-800/50 dark:to-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-700 p-2">
+                  <div className="space-y-2 text-xs">
+                    <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
                       <FontAwesomeIcon
                         icon={faLock}
-                        className="text-green-600 dark:text-green-500 text-lg"
+                        className="text-green-600 dark:text-green-500 text-sm"
                       />
                       <span className="font-medium">Secure Payment</span>
                     </div>
-                    <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                    <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
                       <FontAwesomeIcon
                         icon={faTruck}
-                        className="text-blue-600 dark:text-blue-500 text-lg"
+                        className="text-blue-600 dark:text-blue-500 text-sm"
                       />
                       <span className="font-medium">
                         Free Shipping Over $50
                       </span>
                     </div>
-                    <div className="flex items-center gap-3 text-gray-700 dark:text-gray-300">
+                    <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
                       <FontAwesomeIcon
                         icon={faHeadset}
-                        className="text-purple-600 dark:text-purple-500 text-lg"
+                        className="text-purple-600 dark:text-purple-500 text-sm"
                       />
                       <span className="font-medium">24/7 Customer Support</span>
                     </div>

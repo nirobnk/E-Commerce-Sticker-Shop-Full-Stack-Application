@@ -7,7 +7,6 @@ import {
   useNavigation,
   useNavigate,
 } from "react-router-dom";
-import PageTitle from "./PageTitle";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { loginSuccess, logout } from "../store/auth-slice";
@@ -53,17 +52,19 @@ export default function Profile() {
   }, [actionData]);
 
   const labelStyle =
-    "block text-lg font-semibold text-primary dark:text-light mb-2";
+    "block text-sm font-medium text-primary dark:text-light mb-1.5";
   const h2Style =
-    "block text-2xl font-semibold text-primary dark:text-light mb-2";
+    "block text-xl font-semibold text-primary dark:text-light mb-2";
   const textFieldStyle =
-    "w-full px-4 py-2 text-base border rounded-md transition border-primary dark:border-light focus:ring focus:ring-dark dark:focus:ring-lighter focus:outline-none text-gray-800 dark:text-lighter bg-white dark:bg-gray-600 placeholder-gray-400 dark:placeholder-gray-300";
+    "w-full px-3 py-2 text-sm border rounded-md transition border-primary dark:border-gray-600 focus:ring focus:ring-primary/20 dark:focus:ring-accent/20 focus:outline-none text-gray-800 dark:text-gray-100 bg-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-300";
 
   return (
-    <div className="max-w-[1152px] min-h-[852px] mx-auto px-6 py-8 font-primary bg-normalbg dark:bg-darkbg">
-      <PageTitle title="My Profile" />
+    <div className="max-w-4xl min-h-screen mx-auto px-4 py-6 font-primary bg-normalbg dark:bg-darkbg">
+      <div className="mb-4">
+        <h1 className="text-2xl font-bold text-primary dark:text-light text-center">My Profile</h1>
+      </div>
 
-      <Form method="PUT" className="space-y-6 max-w-[768px] mx-auto">
+      <Form method="PUT" className="space-y-4 max-w-[600px] mx-auto">
         <div>
           <h2 className={h2Style}>Personal Details</h2>
           <label htmlFor="name" className={labelStyle}>

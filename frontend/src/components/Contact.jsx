@@ -1,5 +1,4 @@
 import React from "react";
-import PageTitle from "./PageTitle";
 import { Form } from "react-router-dom";
 import apiClient from "../api/apiClient";
 import { useActionData, useNavigation, useSubmit } from "react-router-dom";
@@ -35,15 +34,17 @@ export default function Contact() {
   };
 
   const labelStyle =
-    "block text-lg font-semibold text-primary dark:text-light mb-2";
+    "block text-sm font-medium text-primary dark:text-light mb-1.5";
   const textFieldStyle =
-    "w-full px-4 py-2 text-base border rounded-md transition border-primary dark:border-light focus:ring focus:ring-dark dark:focus:ring-lighter focus:outline-none text-gray-800 dark:text-lighter bg-white dark:bg-gray-600 placeholder-gray-400 dark:placeholder-gray-300";
+    "w-full px-3 py-1.5 text-sm border rounded-md transition border-primary dark:border-gray-600 focus:ring focus:ring-primary/20 dark:focus:ring-accent/20 focus:outline-none text-gray-800 dark:text-gray-100 bg-white dark:bg-gray-700 placeholder-gray-400 dark:placeholder-gray-300";
   return (
-    <div className="max-w-[1152px] min-h-[852px] mx-auto px-6 py-8 font-primary bg-normalbg dark:bg-darkbg">
+    <div className="max-w-4xl min-h-screen mx-auto px-4 py-6 font-primary bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
       {/* Page Title */}
-      <PageTitle title="Contact Us" />
+      <div className="mb-4">
+        <h1 className="text-2xl font-bold text-primary dark:text-light text-center">Contact Us</h1>
+      </div>
       {/* Contact Info */}
-      <p className="max-w-[768px] mx-auto mt-8 text-gray-600 dark:text-lighter mb-8 text-center">
+      <p className="max-w-[600px] mx-auto text-sm text-gray-700 dark:text-gray-300 mb-4 text-center">
         We’d love to hear from you! If you have any questions, feedback, or
         suggestions, please don’t hesitate to reach out.
       </p>
@@ -53,7 +54,7 @@ export default function Contact() {
         method="POST"
         ref={formRef}
         onSubmit={handleSubmit}
-        className="space-y-6 max-w-[768px] mx-auto"
+        className="space-y-3 max-w-[600px] mx-auto"
       >
         {/* Name Field */}
         <div>
@@ -78,7 +79,7 @@ export default function Contact() {
         </div>
 
         {/* Email and mobile Row */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           {/* Email Field */}
           <div>
             <label htmlFor="email" className={labelStyle}>
@@ -130,7 +131,7 @@ export default function Contact() {
           <textarea
             id="message"
             name="message"
-            rows="4"
+            rows="3"
             placeholder="Your Message"
             className={textFieldStyle}
             required
@@ -145,11 +146,11 @@ export default function Contact() {
         </div>
 
         {/* Submit Button */}
-        <div className="text-center pt-4">
+        <div className="text-center pt-2">
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-8 py-3 text-white text-lg font-semibold rounded-lg transition-smooth bg-gradient-to-r from-primary to-accent hover:from-dark hover:to-primary hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed btn-modern"
+            className="px-6 py-2 text-white text-sm font-semibold rounded-lg transition-all bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 hover:shadow-lg transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-primary/50"
           >
             {isSubmitting ? "Submitting..." : "Submit"}
           </button>
