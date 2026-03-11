@@ -12,6 +12,7 @@
 	<artifactId>stickershop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>stickershop</name>
+	<packaging>jar</packaging>
 	<description>Backend project for stickershop E-commerce application</description>
 	<url/>
 	<licenses>
